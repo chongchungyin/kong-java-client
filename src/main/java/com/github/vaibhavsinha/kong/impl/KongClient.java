@@ -58,14 +58,14 @@ public class KongClient {
             throw new IllegalArgumentException("The adminUrl cannot be null or empty!");
         }
 
-        if (needOAuth2Support) {
+        /*if (needOAuth2Support) {
             if (proxyUrl == null || proxyUrl.isEmpty()) {
                 throw new IllegalArgumentException("The proxyUrl cannot be null or empty!");
             }
             if (!proxyUrl.startsWith("https://")) {
                 throw new IllegalArgumentException("The proxyUrl must use https if you need OAuth2 support!");
             }
-        }
+        }*/
 
 
         RetrofitServiceCreator retrofitServiceCreatorForAdminUrl = new RetrofitServiceCreator(adminUrl);
