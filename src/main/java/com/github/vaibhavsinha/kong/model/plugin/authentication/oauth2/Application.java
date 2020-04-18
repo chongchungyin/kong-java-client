@@ -23,7 +23,7 @@ public class Application {
     @SerializedName("client_id")
     private String clientId;
 
-    @SerializedName("redirect_uri")
+    @SerializedName("redirect_uris")
     private List<String> redirectUri;
 
     @SerializedName("created_at")
