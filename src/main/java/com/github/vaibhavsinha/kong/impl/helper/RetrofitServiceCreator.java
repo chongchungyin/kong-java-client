@@ -1,13 +1,15 @@
 package com.github.vaibhavsinha.kong.impl.helper;
 
 //import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import com.github.vaibhavsinha.kong.utils.HttpsUtil;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-//import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-//import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.lang.reflect.Proxy;
+
+//import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+//import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by vaibhav on 13/06/17.
@@ -22,16 +24,29 @@ public class RetrofitServiceCreator {
     // -------------------------------------------------------------------
 
 	public RetrofitServiceCreator(String baseUrl) {
-
-		retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(initOkHttpClient(baseUrl.toLowerCase().startsWith("https"))) // support https
-				.addConverterFactory(CustomGsonConverterFactory.create()) // replace GsonConverterFactory
-				// .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // add rxJava1 support
-				// .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // add rxJava2 support
-				.build();
-
+	    this(baseUrl, true);
 	}
+
+    public RetrofitServiceCreator(String baseUrl, boolean safe) {
+        if (safe) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .client(initOkHttpClient(baseUrl.toLowerCase().startsWith("https"))) // support https
+                    .addConverterFactory(CustomGsonConverterFactory.create()) // replace GsonConverterFactory
+                    // .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // add rxJava1 support
+                    // .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // add rxJava2 support
+                    .build();
+        }
+        else {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .client(UnsafeOkHttpClient.getUnsafeOkHttpClient()) // support https
+                    .addConverterFactory(CustomGsonConverterFactory.create()) // replace GsonConverterFactory
+                    // .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // add rxJava1 support
+                    // .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // add rxJava2 support
+                    .build();
+        }
+    }
 
     // -------------------------------------------------------------------
 

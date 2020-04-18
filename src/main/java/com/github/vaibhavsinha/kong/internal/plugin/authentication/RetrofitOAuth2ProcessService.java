@@ -22,10 +22,6 @@ public interface RetrofitOAuth2ProcessService {
     Call<Map<String, Object>> authorize(@Path(value = "api_uri", encoded = true) String apiUri, @Body AuthorizationRequest request);
 
     @POST("/{api_uri}/oauth2/token")
-    Call<Token> grantTokenHttps(@Path(value = "api_uri", encoded = true) String apiUri, @Body GrantTokenRequest request);
-
-    @Headers("X-Forwarded-Proto: https")
-    @POST("/{api_uri}/oauth2/token")
-    Call<Token> grantTokenHttp(@Path(value = "api_uri", encoded = true) String apiUri, @Body GrantTokenRequest request);
+    Call<Token> grantToken(@Path(value = "api_uri", encoded = true) String apiUri, @Body GrantTokenRequest request);
 
 }

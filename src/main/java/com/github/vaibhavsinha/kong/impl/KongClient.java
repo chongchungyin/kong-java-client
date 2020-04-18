@@ -94,8 +94,8 @@ public class KongClient {
         }
 
         if(needOAuth2Support) {
-
-            RetrofitServiceCreator retrofitServiceCreatorForProxyUrl = new RetrofitServiceCreator(proxyUrl);
+            boolean isSafe = proxyUrl.startsWith("https://");
+            RetrofitServiceCreator retrofitServiceCreatorForProxyUrl = new RetrofitServiceCreator(proxyUrl, isSafe);
 
             //oauth2 process is on proxy port
             oAuth2ProcessService = retrofitServiceCreatorForProxyUrl.create(OAuth2ProcessService.class, RetrofitOAuth2ProcessService.class);

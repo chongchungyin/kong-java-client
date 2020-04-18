@@ -12,7 +12,5 @@ public interface OAuth2ProcessService {
 
     Map<String, Object> authorize(String apiUri, AuthorizationRequest request);
 
-    Token grantTokenHttps(String apiUri, GrantTokenRequest request);
-
-    Token grantTokenHttp(String apiUri, GrantTokenRequest request);
+    Token grantToken(String apiUri, GrantTokenRequest request);
 }
