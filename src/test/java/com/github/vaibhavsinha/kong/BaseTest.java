@@ -25,7 +25,7 @@ public class BaseTest {
 	@Before
 	public void before() {
 
-		kongClient = new KongClient(KONG_ADMIN_URL, KONG_API_URL, true);
+		kongClient = new KongClient(KONG_ADMIN_URL, KONG_API_URL, true, true);
 
 		gson = new GsonBuilder()
 //				.excludeFieldsWithoutExposeAnnotation() 	//不导出实体中没有用@Expose注解的属性

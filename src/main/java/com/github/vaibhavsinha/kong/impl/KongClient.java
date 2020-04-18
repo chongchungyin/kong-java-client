@@ -45,19 +45,21 @@ public class KongClient {
     private OAuth2ManageService oAuth2ManageService;
 
     private AclService aclService;
+    private boolean safeProxy = true;
 
 
     public KongClient(String adminUrl) {
-        this(adminUrl, null, false);
+        this(adminUrl, null, true, false);
     }
 
 
-    public KongClient(String adminUrl, String proxyUrl, boolean needOAuth2Support) {
+    public KongClient(String adminUrl, String proxyUrl, boolean safeProxy, boolean needOAuth2Support) {
 
         if (adminUrl == null || adminUrl.isEmpty()) {
             throw new IllegalArgumentException("The adminUrl cannot be null or empty!");
         }
 
+        this.safeProxy = safeProxy;
         /*if (needOAuth2Support) {
             if (proxyUrl == null || proxyUrl.isEmpty()) {
                 throw new IllegalArgumentException("The proxyUrl cannot be null or empty!");
@@ -94,8 +96,7 @@ public class KongClient {
         }
 
         if(needOAuth2Support) {
-            boolean isSafe = proxyUrl.startsWith("https://");
-            RetrofitServiceCreator retrofitServiceCreatorForProxyUrl = new RetrofitServiceCreator(proxyUrl, isSafe);
+            RetrofitServiceCreator retrofitServiceCreatorForProxyUrl = new RetrofitServiceCreator(proxyUrl, safeProxy);
 
             //oauth2 process is on proxy port
             oAuth2ProcessService = retrofitServiceCreatorForProxyUrl.create(OAuth2ProcessService.class, RetrofitOAuth2ProcessService.class);
