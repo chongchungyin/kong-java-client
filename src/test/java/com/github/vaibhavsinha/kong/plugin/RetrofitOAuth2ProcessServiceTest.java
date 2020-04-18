@@ -61,7 +61,7 @@ public class RetrofitOAuth2ProcessServiceTest extends BaseTest {
         request.setGrantType("authorization_code");
         request.setCode(code);
 
-        Token token = kongClient.getOAuth2ProcessService().grantToken(API_URI, request);
+        Token token = kongClient.getOAuth2ProcessService().grantTokenHttps(API_URI, request);
         cache.put("token", token);
         printJson(cache);
     }
@@ -79,7 +79,7 @@ public class RetrofitOAuth2ProcessServiceTest extends BaseTest {
         request.setGrantType("refresh_token");
         request.setRefreshToken(token.getRefreshToken());
 
-        Token newToken = kongClient.getOAuth2ProcessService().grantToken(API_URI, request);
+        Token newToken = kongClient.getOAuth2ProcessService().grantTokenHttps(API_URI, request);
         cache.put("token", token);
         printJson(cache);
     }
@@ -122,7 +122,7 @@ public class RetrofitOAuth2ProcessServiceTest extends BaseTest {
         request.setProvisionKey(API_PROVISION_KEY);     //must
         request.setAuthenticatedUserid("testUserId");   //must
 
-        Token token = kongClient.getOAuth2ProcessService().grantToken(API_URI, request);
+        Token token = kongClient.getOAuth2ProcessService().grantTokenHttps(API_URI, request);
         cache.put("token", token);
         printJson(cache);
     }
@@ -141,7 +141,7 @@ public class RetrofitOAuth2ProcessServiceTest extends BaseTest {
         request.setProvisionKey(API_PROVISION_KEY);     //must
         request.setAuthenticatedUserid("testUserId");   //must
 
-        Token token = kongClient.getOAuth2ProcessService().grantToken(API_URI, request);
+        Token token = kongClient.getOAuth2ProcessService().grantTokenHttps(API_URI, request);
         cache.put("token", token);
         printJson(cache);
     }
